@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Comparativo Anual St. Robert</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+ color-scheme:light;
+ --panel:#ffffff; --panel2:#f7f9fb; --line:#e8ebef; --line2:#d8dde3;
+ --txt:#0D0D0D; --dim:#6b7280; --dim2:#9aa5b1; --slateink:#6E86A6;
+ --green:#00CA9E; --green-d:#00a884; --green-soft:#e6faf5;
+ --alert:#ef5b4c; --alert-soft:#fdecea;
+ --venda:#D69022; --venda-soft:#fdf3e3;
+ --blue:#4285F4; --blue-soft:#eaf1fe;
+ --pink:#C13584;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--panel);color:var(--txt);font-family:'Poppins',system-ui,sans-serif;font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1300px;margin:0 auto;padding:0 24px}
+.mono{font-variant-numeric:tabular-nums}
+
+/* ---------- CABEÇALHO ---------- */
+header{border-bottom:1px solid var(--line);padding:26px 0 22px;background:linear-gradient(180deg,#fbfdfe,transparent)}
+.htop{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column;gap:2px}
+.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--green-d);font-weight:700}
+.brand h1{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.brand .sub{color:var(--dim);font-size:13px}
+.period{text-align:right;font-size:11.5px;color:var(--dim)}
+.period .big{font-size:15px;color:var(--txt);font-weight:700;margin-top:2px}
+
+/* ---------- PILLS DE PERÍODO ---------- */
+.pills{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap;align-items:center}
+.pp{display:inline-block;border:1px solid var(--line2);background:var(--panel);color:var(--dim);font-size:10.5px;font-weight:700;
+    letter-spacing:.09em;text-transform:uppercase;padding:7px 15px;border-radius:20px;white-space:nowrap}
+.pp.on{background:var(--green-soft);border-color:var(--green);color:var(--green-d)}
+.pp.on.a{background:var(--panel2);border-color:var(--line2);color:var(--slateink)}
+.flab{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:700}
+
+/* ---------- RESUMO ---------- */
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(156px,1fr));gap:10px;margin-top:20px}
+.rc{border:1px solid var(--line);border-radius:14px;padding:14px 15px;background:var(--panel);box-shadow:0 1px 3px rgba(13,13,13,.04)}
+.rc .k{font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);font-weight:700}
+.rc .v{font-size:23px;font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-top:5px;font-variant-numeric:tabular-nums}
+.rc .s{font-size:11px;color:var(--dim2);margin-top:4px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+
+/* ---------- SEÇÕES ---------- */
+section{padding:34px 0 0}
+.st{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.st i{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+.st h2{font-size:12px;letter-spacing:.11em;text-transform:uppercase;font-weight:700;color:var(--txt)}
+.st span{font-size:11.5px;color:var(--dim2);font-weight:400;text-transform:none;letter-spacing:0}
+
+/* ---------- FERRAMENTAS ---------- */
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.chip{border:1px solid var(--line2);background:var(--panel);color:var(--dim);font-family:'Poppins';font-size:12px;font-weight:600;
+      padding:6px 14px;border-radius:20px;cursor:pointer;transition:.15s;white-space:nowrap}
+.chip:hover{color:var(--txt);border-color:var(--dim2)}
+.chip.on{background:var(--txt);border-color:var(--txt);color:#fff}
+.busca{font:inherit;font-family:'Poppins';font-size:12.5px;padding:7px 13px;border:1px solid var(--line2);border-radius:20px;background:var(--panel);color:var(--txt);min-width:210px}
+.busca::placeholder{color:var(--dim2)}
+.selm{font:inherit;font-family:'Poppins';font-size:12.5px;font-weight:600;padding:7px 13px;border:1px solid var(--line2);border-radius:20px;background:var(--panel);color:var(--txt);cursor:pointer;max-width:100%}
+
+/* ---------- TABELAS ---------- */
+.card{border:1px solid var(--line);border-radius:16px;background:var(--panel);box-shadow:0 1px 3px rgba(13,13,13,.04);overflow:hidden}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:var(--panel2);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);font-weight:700;
+         padding:13px 14px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--line)}
+thead th.n{text-align:right}
+tbody td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+tbody tr:hover td{background:#fbfcfd}
+tr.blk td{background:var(--txt);padding:9px 14px;border-bottom:none}
+tr.blk .bl{display:flex;align-items:center;gap:9px;color:#fff;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+tr.blk .bl i{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+tr.blk:hover td{background:var(--txt)}
+tr.sub td{background:var(--panel2);padding:7px 14px;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--green-d);font-weight:700;border-bottom:1px solid var(--line)}
+tr.sub:hover td{background:var(--panel2)}
+td.met{font-weight:600;color:var(--txt);min-width:270px}
+td.met small{display:block;font-weight:400;color:var(--dim2);font-size:10.5px;line-height:1.4;margin-top:1px;white-space:normal;max-width:430px}
+.v25{color:var(--slateink)}
+.v26{color:var(--green-d)}
+.dp{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.dp.good{background:var(--green-soft);color:var(--green-d)}
+.dp.bad{background:var(--alert-soft);color:var(--alert)}
+.dp.neu{background:var(--panel2);color:var(--dim)}
+.dp.new{background:var(--venda-soft);color:var(--venda)}
+.dp.na{background:transparent;color:var(--dim2)}
+.nd{color:var(--dim2);font-weight:400}
+
+/* ---------- NOTAS ---------- */
+.nota{border-radius:12px;padding:13px 16px;font-size:12.5px;line-height:1.6;margin-top:14px;border:1px solid;border-left-width:3px}
+.nota b{font-weight:700}
+.n-verde{background:var(--green-soft);border-color:rgba(0,202,158,.32);border-left-color:var(--green);color:#04614e}
+.n-laranja{background:var(--venda-soft);border-color:rgba(214,144,34,.32);border-left-color:var(--venda);color:#7a4f06}
+.n-azul{background:var(--blue-soft);border-color:rgba(66,133,244,.3);border-left-color:var(--blue);color:#1b3f7d}
+.n-vermelha{background:var(--alert-soft);border-color:rgba(239,91,76,.32);border-left-color:var(--alert);color:#8c2418}
+
+/* ---------- RODAPÉ ---------- */
+footer{border-top:1px solid var(--line);margin-top:44px;padding:26px 0 46px;font-size:11.5px;color:var(--dim);line-height:1.7}
+footer b{color:var(--txt)}
+.fbrand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:var(--txt);margin-bottom:12px}
+.fbrand .dot{width:17px;height:17px;border-radius:5px;background:var(--green)}
+.fbrand em{font-style:normal;color:var(--green-d)}
+[hidden]{display:none!important}
+@media(max-width:820px){
+ .wrap{padding:0 15px} .brand h1{font-size:21px} .period{text-align:left}
+ .jan{margin-left:0} td.met{min-width:200px} 
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap">
+  <div class="htop">
+   <div class="brand">
+    <span class="eyebrow">Keepads · Gestão de Tráfego</span>
+    <h1>Hotel Fazenda St. Robert</h1>
+    <span class="sub">Comparativo ano contra ano · março a agosto · Meta Ads, Google Ads, Analytics e Instagram · todas as métricas</span>
+   </div>
+   <div class="period">
+    Base de dados
+    <div class="big">Mar a Ago · 2025 x 2026</div>
+    <div>seis meses fechados em cada ano</div>
+   </div>
+  </div>
+  <div class="pills">
+   <span class="pp on a">◄ Mar/25 a Ago/25 · antes</span>
+   <span class="pp on">Mar/26 a Ago/26 · agora ►</span>
+  </div>
+  <div class="res" id="resumo"></div>
+ </div>
+</header>
+
+<div class="wrap">
+
+ <section>
+  <div class="st"><i style="background:var(--green)"></i><h2>Métricas lado a lado</h2><span id="lbl-lado"></span></div>
+  <div class="tools" id="tools"></div>
+  <div class="card scroll"><table id="tlado"></table></div>
+ </section>
+
+</div>
+
+<footer>
+ <div class="wrap">
+  <div class="fbrand"><div class="dot"></div><span>keep<em>ads</em></span></div>
+  <b>Metodologia.</b>
+  Os números vêm do dashboard operacional St. Robert (Meta Ads, Google Ads, GA4 e Instagram Insights), sem recálculo de base.
+  Volumes são a soma do período. Custos e taxas são calculados sobre o total do período (soma do numerador dividida pela soma do denominador), nunca média de médias.
+  Onde a exportação não traz a base do denominador, a métrica é uma média ponderada pela verba ou pelas impressões.
+  Custo por mil alcançados, custo por clique e custo por visualização usam a verba total da conta, como o próprio Meta reporta.
+  Custo por mensagem e custo por compra usam a verba das campanhas daquele objetivo, para não misturar tracks de conversão.
+  O recorte é março a agosto, seis meses fechados em cada ano, para a comparação ficar justa mês a mês. Setembro de 2026 está fechado só até o dia 24 e por isso ficou fora do relatório.
+  Quando um evento passou a ser medido no meio do intervalo, a comparação fica restrita aos meses presentes nos dois anos, e o que não existia em 2025 aparece marcado como capacidade nova.
+  Isso vale para as compras e o carrinho no Meta, que entraram em Mai/26, para o valor de conversão do Google, que passou a ser registrado em Mar/26, para os contatos no WhatsApp no GA4, medidos a partir de Mai/26, e para visualizações, interações e seguidores do Instagram, reportados a partir de Ago/25 e Set/25.
+  Receita, ticket médio e ROAS vêm do GA4 e das plataformas: são atribuição declarada, não faturamento auditado do hotel.
+  A linha de resultados somados do Meta junta objetivos diferentes na mesma conta e serve só como volume bruto, não como indicador de performance.
+  Nenhuma métrica foi omitida: o que piorou aparece em vermelho na coluna de variação.
+ </div>
+</footer>
+<script>
+const DATA={"cliente": "Hotel Fazenda St. Robert", "meses": ["Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set"], "m25": ["Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25"], "m26": ["Mar/26", "Abr/26", "Mai/26", "Jun/26", "Jul/26", "Ago/26", "Set/26"], "todos": ["Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Mar/26", "Abr/26", "Mai/26", "Jun/26", "Jul/26", "Ago/26", "Set/26"], "parcial": "Set/26", "parcialDia": 24, "periodo": {"de": "01/03/2025", "ate": "24/09/2026"}, "blocos": [["Consolidado", "#0D0D0D"], ["Meta Ads", "#00CA9E"], ["Google Ads", "#4285F4"], ["Analytics", "#D69022"], ["Instagram", "#C13584"]], "metricas": [{"bloco": "Meta Ads", "sub": "Volume", "id": "m_spend", "lab": "Investimento", "desc": "verba total da conta no Meta", "fmt": "brl", "dir": "in", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [13541.0, 15004.17, 14956.7, 15862.65, 15066.07, 15740.61, 16806.68, 19667.88, 17906.56, 19364.91, 18527.78, 17741.98, 21717.46, 17153.79], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Volume", "id": "m_impr", "lab": "Impressões", "desc": "quantas vezes os anúncios apareceram", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [1516633, 1770464, 1668771, 1524985, 1491722, 1683429, 2680730, 3331470, 2141369, 2225989, 2656330, 3292682, 3242412, 1947144], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Volume", "id": "m_reach", "lab": "Alcance", "desc": "pessoas únicas atingidas", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [1406791, 1611544, 1482879, 1332887, 1324570, 1485766, 2153545, 3105382, 1946374, 2099090, 2519847, 3155678, 3056532, 1838859], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Volume", "id": "m_clicks", "lab": "Cliques no link", "desc": "quem clicou para sair do anúncio", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [6238, 9688, 6777, 9058, 7000, 6900, 8480, 22773, 31549, 36083, 38816, 46377, 63138, 40654], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Volume", "id": "m_lpv", "lab": "Visitas na página de destino", "desc": "cliques que carregaram a página", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [461, 515, 490, 677, 517, 481, 551, 1574, 2621, 4478, 6942, 7723, 9429, 4437], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Volume", "id": "m_v25", "lab": "Visualizações 25%", "desc": "viram um quarto do vídeo", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [20109, 37908, 43578, 46516, 30416, 29598, 19739, 117519, 125993, 272174, 315645, 377971, 371231, 136822], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Volume", "id": "m_v75", "lab": "Visualizações 75%", "desc": "ThruPlays, viram três quartos do vídeo", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [4391, 10983, 11001, 11493, 7936, 7800, 4610, 31482, 41918, 121001, 151818, 159893, 131527, 34067], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Volume", "id": "m_msg", "lab": "Mensagens no WhatsApp", "desc": "conversas iniciadas pelas campanhas de mensagem", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [1725, 3100, 1673, 2627, 1780, 1598, 1957, 8095, 8047, 6211, 3753, 4124, 5550, 4388], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Volume", "id": "m_atc", "lab": "Adições ao carrinho", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "Passou a ser medido em Mai/26", "dec": 2, "num": [0, 0, 0, 0, 0, 0, 0, 0, 0, 178, 543, 684, 1167, 885], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Volume", "id": "m_chk", "lab": "Checkouts iniciados", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "Passou a ser medido em Mai/26", "dec": 2, "num": [0, 0, 0, 0, 0, 0, 0, 0, 0, 130, 432, 573, 960, 734], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Volume", "id": "m_compras", "lab": "Compras", "desc": "reservas atribuídas ao Meta", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "Campanha de venda entrou no ar em Mai/26", "dec": 2, "num": [0, 0, 0, 0, 0, 0, 0, 0, 0, 43, 145, 116, 239, 132], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Volume", "id": "m_valor", "lab": "Valor das compras", "desc": "receita atribuída pelo Meta", "fmt": "brl", "dir": "up", "modo": "soma", "mult": 1, "nota": "Campanha de venda entrou no ar em Mai/26", "dec": 2, "num": [null, null, null, null, null, null, null, null, null, 129802.8, 410248.5, 316454.1, 672344.28, 296754.0], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Volume", "id": "m_seg", "lab": "Novos seguidores", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [589, 2555, 4038, 2988, 1655, 2126, 902, 2491, 5235, 7807, 7827, 8086, 10695, 5658], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Volume", "id": "m_res", "lab": "Resultados somados", "desc": "soma bruta de todos os objetivos", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "Mistura objetivos diferentes, não use como indicador de performance", "dec": 2, "num": [1189001, 953225, 671760, 624832, 708084, 721679, 757307, 1902112, 530456, 483191, 1090331, 1731920, 1350117, 854656], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Verba por objetivo", "id": "m_sp_msg", "lab": "Verba em mensagem", "desc": "", "fmt": "brl", "dir": "in", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [11207.4, 12450.43, 13258.81, 14366.99, 13558.46, 14270.94, 15327.89, 15915.78, 14986.85, 13190.48, 8701.76, 8141.85, 9809.51, 10282.41], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Verba por objetivo", "id": "m_sp_venda", "lab": "Verba em venda", "desc": "", "fmt": "brl", "dir": "in", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [0, 0, 0, 0, 0, 0, 0, 0, 0, 435.04, 2204.59, 1495.72, 2987.11, 1118.22], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Verba por objetivo", "id": "m_sp_alc", "lab": "Verba em alcance", "desc": "", "fmt": "brl", "dir": "in", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [2333.6, 2553.74, 1697.89, 1495.66, 1507.61, 1469.67, 1478.79, 3752.1, 764.08, 611.77, 1280.56, 1817.53, 1520.21, 1187.0], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Verba por objetivo", "id": "m_sp_traf", "lab": "Verba em tráfego", "desc": "", "fmt": "brl", "dir": "in", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [0, 0, 0, 0, 0, 0, 0, 0, 1079.21, 2665.25, 4412.03, 4071.79, 5417.09, 3593.73], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Verba por objetivo", "id": "m_sp_vid", "lab": "Verba em vídeo", "desc": "", "fmt": "brl", "dir": "in", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [0, 0, 0, 0, 0, 0, 0, 0, 1076.42, 2462.37, 1928.84, 2215.09, 1983.54, 972.43], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Verba por objetivo", "id": "m_sp_eng", "lab": "Verba em engajamento", "desc": "", "fmt": "brl", "dir": "in", "modo": "soma", "mult": 1, "nota": "Sem veiculação em nenhum dos dois períodos", "dec": 2, "num": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Verba por objetivo", "id": "m_r_alc", "lab": "Contas alcançadas (campanha de alcance)", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [1187276, 950125, 670087, 622205, 706304, 720081, 755350, 1894017, 475016, 362232, 962615, 1593176, 1222431, 800260], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Verba por objetivo", "id": "m_r_traf", "lab": "Cliques (campanha de tráfego)", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [0, 0, 0, 0, 0, 0, 0, 0, 10351, 19330, 26513, 31949, 46637, 27989], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Verba por objetivo", "id": "m_r_vid", "lab": "Reproduções (campanha de vídeo)", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [0, 0, 0, 0, 0, 0, 0, 0, 37042, 95375, 97305, 102555, 75260, 21887], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Verba por objetivo", "id": "m_r_eng", "lab": "Engajamentos (campanha de engajamento)", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "Sem veiculação em nenhum dos dois períodos", "dec": 2, "num": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "den": null, "peso": null}, {"bloco": "Meta Ads", "sub": "Custo", "id": "m_cpm", "lab": "CPM", "desc": "custo por mil impressões", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1000, "nota": "", "dec": 2, "num": [13541.0, 15004.17, 14956.7, 15862.65, 15066.07, 15740.61, 16806.68, 19667.88, 17906.56, 19364.91, 18527.78, 17741.98, 21717.46, 17153.79], "den": [1516633, 1770464, 1668771, 1524985, 1491722, 1683429, 2680730, 3331470, 2141369, 2225989, 2656330, 3292682, 3242412, 1947144], "peso": null}, {"bloco": "Meta Ads", "sub": "Custo", "id": "m_cpmil", "lab": "Custo por mil alcançados", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1000, "nota": "", "dec": 2, "num": [13541.0, 15004.17, 14956.7, 15862.65, 15066.07, 15740.61, 16806.68, 19667.88, 17906.56, 19364.91, 18527.78, 17741.98, 21717.46, 17153.79], "den": [1406791, 1611544, 1482879, 1332887, 1324570, 1485766, 2153545, 3105382, 1946374, 2099090, 2519847, 3155678, 3056532, 1838859], "peso": null}, {"bloco": "Meta Ads", "sub": "Custo", "id": "m_cpc", "lab": "Custo por clique", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "", "dec": 2, "num": [13541.0, 15004.17, 14956.7, 15862.65, 15066.07, 15740.61, 16806.68, 19667.88, 17906.56, 19364.91, 18527.78, 17741.98, 21717.46, 17153.79], "den": [6238, 9688, 6777, 9058, 7000, 6900, 8480, 22773, 31549, 36083, 38816, 46377, 63138, 40654], "peso": null}, {"bloco": "Meta Ads", "sub": "Custo", "id": "m_cplpv", "lab": "Custo por visita na página", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "", "dec": 2, "num": [13541.0, 15004.17, 14956.7, 15862.65, 15066.07, 15740.61, 16806.68, 19667.88, 17906.56, 19364.91, 18527.78, 17741.98, 21717.46, 17153.79], "den": [461, 515, 490, 677, 517, 481, 551, 1574, 2621, 4478, 6942, 7723, 9429, 4437], "peso": null}, {"bloco": "Meta Ads", "sub": "Custo", "id": "m_cpv25", "lab": "Custo por visualização 25%", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "", "dec": 4, "num": [13541.0, 15004.17, 14956.7, 15862.65, 15066.07, 15740.61, 16806.68, 19667.88, 17906.56, 19364.91, 18527.78, 17741.98, 21717.46, 17153.79], "den": [20109, 37908, 43578, 46516, 30416, 29598, 19739, 117519, 125993, 272174, 315645, 377971, 371231, 136822], "peso": null}, {"bloco": "Meta Ads", "sub": "Custo", "id": "m_cpv75", "lab": "Custo por visualização 75%", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "", "dec": 4, "num": [13541.0, 15004.17, 14956.7, 15862.65, 15066.07, 15740.61, 16806.68, 19667.88, 17906.56, 19364.91, 18527.78, 17741.98, 21717.46, 17153.79], "den": [4391, 10983, 11001, 11493, 7936, 7800, 4610, 31482, 41918, 121001, 151818, 159893, 131527, 34067], "peso": null}, {"bloco": "Meta Ads", "sub": "Custo", "id": "m_cpmsg", "lab": "Custo por mensagem", "desc": "verba das campanhas de mensagem por conversa", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "", "dec": 2, "num": [11207.4, 12450.43, 13258.81, 14366.99, 13558.46, 14270.94, 15327.89, 15915.78, 14986.85, 13190.48, 8701.76, 8141.85, 9809.51, 10282.41], "den": [1725, 3100, 1673, 2627, 1780, 1598, 1957, 8095, 8047, 6211, 3753, 4124, 5550, 4388], "peso": null}, {"bloco": "Meta Ads", "sub": "Custo", "id": "m_cpatc", "lab": "Custo por adição ao carrinho", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "Passou a ser medido em Mai/26", "dec": 2, "num": [13541.0, 15004.17, 14956.7, 15862.65, 15066.07, 15740.61, 16806.68, 19667.88, 17906.56, 19364.91, 18527.78, 17741.98, 21717.46, 17153.79], "den": [0, 0, 0, 0, 0, 0, 0, 0, 0, 178, 543, 684, 1167, 885], "peso": null}, {"bloco": "Meta Ads", "sub": "Custo", "id": "m_cpchk", "lab": "Custo por checkout", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "Passou a ser medido em Mai/26", "dec": 2, "num": [13541.0, 15004.17, 14956.7, 15862.65, 15066.07, 15740.61, 16806.68, 19667.88, 17906.56, 19364.91, 18527.78, 17741.98, 21717.46, 17153.79], "den": [0, 0, 0, 0, 0, 0, 0, 0, 0, 130, 432, 573, 960, 734], "peso": null}, {"bloco": "Meta Ads", "sub": "Custo", "id": "m_cpcompra", "lab": "Custo por compra", "desc": "verba das campanhas de venda por compra", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "Campanha de venda entrou no ar em Mai/26", "dec": 2, "num": [0, 0, 0, 0, 0, 0, 0, 0, 0, 435.04, 2204.59, 1495.72, 2987.11, 1118.22], "den": [0, 0, 0, 0, 0, 0, 0, 0, 0, 43, 145, 116, 239, 132], "peso": null}, {"bloco": "Meta Ads", "sub": "Custo", "id": "m_cpcompra_t", "lab": "Custo por compra sobre a verba total", "desc": "leitura conservadora, verba inteira do Meta", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "Campanha de venda entrou no ar em Mai/26", "dec": 2, "num": [13541.0, 15004.17, 14956.7, 15862.65, 15066.07, 15740.61, 16806.68, 19667.88, 17906.56, 19364.91, 18527.78, 17741.98, 21717.46, 17153.79], "den": [0, 0, 0, 0, 0, 0, 0, 0, 0, 43, 145, 116, 239, 132], "peso": null}, {"bloco": "Meta Ads", "sub": "Custo", "id": "m_cpseg", "lab": "Custo por novo seguidor", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "", "dec": 2, "num": [13541.0, 15004.17, 14956.7, 15862.65, 15066.07, 15740.61, 16806.68, 19667.88, 17906.56, 19364.91, 18527.78, 17741.98, 21717.46, 17153.79], "den": [589, 2555, 4038, 2988, 1655, 2126, 902, 2491, 5235, 7807, 7827, 8086, 10695, 5658], "peso": null}, {"bloco": "Meta Ads", "sub": "Custo", "id": "m_cpalc", "lab": "Custo por conta alcançada (campanha de alcance)", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "", "dec": 4, "num": [2333.6, 2553.74, 1697.89, 1495.66, 1507.61, 1469.67, 1478.79, 3752.1, 764.08, 611.77, 1280.56, 1817.53, 1520.21, 1187.0], "den": [1187276, 950125, 670087, 622205, 706304, 720081, 755350, 1894017, 475016, 362232, 962615, 1593176, 1222431, 800260], "peso": null}, {"bloco": "Meta Ads", "sub": "Custo", "id": "m_cptraf", "lab": "Custo por clique (campanha de tráfego)", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "", "dec": 4, "num": [0, 0, 0, 0, 0, 0, 0, 0, 1079.21, 2665.25, 4412.03, 4071.79, 5417.09, 3593.73], "den": [0, 0, 0, 0, 0, 0, 0, 0, 10351, 19330, 26513, 31949, 46637, 27989], "peso": null}, {"bloco": "Meta Ads", "sub": "Custo", "id": "m_cpvid", "lab": "Custo por reprodução (campanha de vídeo)", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "", "dec": 4, "num": [0, 0, 0, 0, 0, 0, 0, 0, 1076.42, 2462.37, 1928.84, 2215.09, 1983.54, 972.43], "den": [0, 0, 0, 0, 0, 0, 0, 0, 37042, 95375, 97305, 102555, 75260, 21887], "peso": null}, {"bloco": "Meta Ads", "sub": "Taxa", "id": "m_ctr", "lab": "CTR da conta", "desc": "cliques divididos por impressões", "fmt": "pct", "dir": "up", "modo": "razao", "mult": 100, "nota": "", "dec": 2, "num": [6238, 9688, 6777, 9058, 7000, 6900, 8480, 22773, 31549, 36083, 38816, 46377, 63138, 40654], "den": [1516633, 1770464, 1668771, 1524985, 1491722, 1683429, 2680730, 3331470, 2141369, 2225989, 2656330, 3292682, 3242412, 1947144], "peso": null}, {"bloco": "Meta Ads", "sub": "Taxa", "id": "m_ctr_msg", "lab": "CTR das campanhas de mensagem", "desc": "", "fmt": "pct", "dir": "up", "modo": "pond", "mult": 1, "nota": "Média ponderada pela verba de mensagem, a base de impressões do objetivo não vem na exportação", "dec": 2, "num": [1.335, 1.016, 0.57, 0.887, 0.754, 0.617, 0.37, 1.46, 1.591, 1.656, 1.912, 2.207, 2.212, 2.172], "den": null, "peso": [11207.4, 12450.43, 13258.81, 14366.99, 13558.46, 14270.94, 15327.89, 15915.78, 14986.85, 13190.48, 8701.76, 8141.85, 9809.51, 10282.41]}, {"bloco": "Meta Ads", "sub": "Taxa", "id": "m_cpm_msg", "lab": "CPM das campanhas de mensagem", "desc": "", "fmt": "brl", "dir": "down", "modo": "pond", "mult": 1, "nota": "Média ponderada pela verba de mensagem", "dec": 2, "num": [35.48, 15.39, 13.4, 16.04, 17.41, 14.95, 8.01, 11.46, 11.83, 13.64, 16.84, 16.91, 16.86, 21.34], "den": null, "peso": [11207.4, 12450.43, 13258.81, 14366.99, 13558.46, 14270.94, 15327.89, 15915.78, 14986.85, 13190.48, 8701.76, 8141.85, 9809.51, 10282.41]}, {"bloco": "Meta Ads", "sub": "Taxa", "id": "m_freq", "lab": "Frequência", "desc": "quantas vezes a mesma pessoa viu", "fmt": "n2", "dir": "down", "modo": "razao", "mult": 1, "nota": "", "dec": 2, "num": [1516633, 1770464, 1668771, 1524985, 1491722, 1683429, 2680730, 3331470, 2141369, 2225989, 2656330, 3292682, 3242412, 1947144], "den": [1406791, 1611544, 1482879, 1332887, 1324570, 1485766, 2153545, 3105382, 1946374, 2099090, 2519847, 3155678, 3056532, 1838859], "peso": null}, {"bloco": "Meta Ads", "sub": "Taxa", "id": "m_hook", "lab": "Hook rate", "desc": "quem parou no primeiro segundo", "fmt": "pct", "dir": "up", "modo": "pond", "mult": 1, "nota": "", "dec": 2, "num": [6.32, 9.06, 9.67, 10.7, 7.37, 7.59, 2.99, 11.15, 17.02, 24.02, 21.3, 19.88, 19.75, 15.55], "den": null, "peso": [1516633, 1770464, 1668771, 1524985, 1491722, 1683429, 2680730, 3331470, 2141369, 2225989, 2656330, 3292682, 3242412, 1947144]}, {"bloco": "Meta Ads", "sub": "Taxa", "id": "m_body", "lab": "Body rate", "desc": "quem seguiu assistindo", "fmt": "pct", "dir": "up", "modo": "pond", "mult": 1, "nota": "", "dec": 2, "num": [0.7, 1.2, 1.11, 1.34, 1.14, 1.29, 0.76, 1.42, 2.73, 8.01, 7.47, 6.0, 5.09, 2.35], "den": null, "peso": [1516633, 1770464, 1668771, 1524985, 1491722, 1683429, 2680730, 3331470, 2141369, 2225989, 2656330, 3292682, 3242412, 1947144]}, {"bloco": "Meta Ads", "sub": "Taxa", "id": "m_connect", "lab": "Connect rate", "desc": "cliques que viraram visita na página", "fmt": "pct", "dir": "up", "modo": "razao", "mult": 100, "nota": "", "dec": 2, "num": [461, 515, 490, 677, 517, 481, 551, 1574, 2621, 4478, 6942, 7723, 9429, 4437], "den": [6238, 9688, 6777, 9058, 7000, 6900, 8480, 22773, 31549, 36083, 38816, 46377, 63138, 40654], "peso": null}, {"bloco": "Meta Ads", "sub": "Taxa", "id": "m_convrate", "lab": "Taxa de conversa por clique", "desc": "", "fmt": "pct", "dir": "up", "modo": "pond", "mult": 1, "nota": "Média ponderada pela verba de mensagem", "dec": 2, "num": [40.9, 37.7, 29.68, 33.05, 30.31, 27.13, 27.65, 39.93, 39.94, 38.78, 37.99, 38.81, 43.12, 41.92], "den": null, "peso": [11207.4, 12450.43, 13258.81, 14366.99, 13558.46, 14270.94, 15327.89, 15915.78, 14986.85, 13190.48, 8701.76, 8141.85, 9809.51, 10282.41]}, {"bloco": "Meta Ads", "sub": "Taxa", "id": "m_roas", "lab": "ROAS do Meta", "desc": "valor das compras dividido pela verba de venda", "fmt": "n2", "dir": "up", "modo": "razao", "mult": 1, "nota": "Atribuição declarada pela plataforma, não é faturamento auditado", "dec": 2, "num": [null, null, null, null, null, null, null, null, null, 129802.8, 410248.5, 316454.1, 672344.28, 296754.0], "den": [0, 0, 0, 0, 0, 0, 0, 0, 0, 435.04, 2204.59, 1495.72, 2987.11, 1118.22], "peso": null}, {"bloco": "Google Ads", "sub": "Volume", "id": "g_custo", "lab": "Investimento", "desc": "", "fmt": "brl", "dir": "in", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [2923.1, 2982.71, 2901.0, 3059.54, 3141.53, 3012.56, 3039.87, 3017.11, 2219.43, 2220.42, 3027.79, 2843.68, 2750.3, 2174.67], "den": null, "peso": null}, {"bloco": "Google Ads", "sub": "Volume", "id": "g_impr", "lab": "Impressões", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [28078, 25351, 24926, 28654, 31137, 27742, 25401, 30019, 22432, 24625, 31376, 37965, 41542, 37010], "den": null, "peso": null}, {"bloco": "Google Ads", "sub": "Volume", "id": "g_eleg", "lab": "Impressões elegíveis", "desc": "quanto de busca existia para disputar", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [52209, null, 48287, 47932, 54607, 46453, 44485, 49676, 40689, 59842, 141333, 162661, 198102, 196652], "den": null, "peso": null}, {"bloco": "Google Ads", "sub": "Volume", "id": "g_clicks", "lab": "Cliques", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [8739, 7075, 6954, 7537, 8291, 7039, 7021, 6366, 5615, 5565, 8456, 11604, 10980, 8158], "den": null, "peso": null}, {"bloco": "Google Ads", "sub": "Volume", "id": "g_conv", "lab": "Conversões", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [130.17, 155.83, 183.01, 191.0, 220.67, 155.35, 151.98, 134.99, 168.07, 557.95, 1300.97, 192.0, 273.0, 213.0], "den": null, "peso": null}, {"bloco": "Google Ads", "sub": "Volume", "id": "g_valor", "lab": "Valor de conversão", "desc": "", "fmt": "brl", "dir": "up", "modo": "soma", "mult": 1, "nota": "Receita passou a ser registrada em Mar/26", "dec": 2, "num": [0.0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 8796.79, 6951.07, 365227.13, 579988.2, 623264.08, 870150.85, 598130.48], "den": null, "peso": null}, {"bloco": "Google Ads", "sub": "Volume", "id": "g_ncamp", "lab": "Campanhas ativas", "desc": "", "fmt": "n1", "dir": "up", "modo": "media", "mult": 1, "nota": "", "dec": 2, "num": [2, 2, 3, 2, 3, 3, 4, 2, 2, 3, 5, 3, 5, 5], "den": null, "peso": null}, {"bloco": "Google Ads", "sub": "Custo", "id": "g_cpm", "lab": "CPM", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1000, "nota": "", "dec": 2, "num": [2923.1, 2982.71, 2901.0, 3059.54, 3141.53, 3012.56, 3039.87, 3017.11, 2219.43, 2220.42, 3027.79, 2843.68, 2750.3, 2174.67], "den": [28078, 25351, 24926, 28654, 31137, 27742, 25401, 30019, 22432, 24625, 31376, 37965, 41542, 37010], "peso": null}, {"bloco": "Google Ads", "sub": "Custo", "id": "g_cpc", "lab": "Custo por clique", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "", "dec": 2, "num": [2923.1, 2982.71, 2901.0, 3059.54, 3141.53, 3012.56, 3039.87, 3017.11, 2219.43, 2220.42, 3027.79, 2843.68, 2750.3, 2174.67], "den": [8739, 7075, 6954, 7537, 8291, 7039, 7021, 6366, 5615, 5565, 8456, 11604, 10980, 8158], "peso": null}, {"bloco": "Google Ads", "sub": "Custo", "id": "g_cpa", "lab": "Custo por conversão", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "", "dec": 2, "num": [2923.1, 2982.71, 2901.0, 3059.54, 3141.53, 3012.56, 3039.87, 3017.11, 2219.43, 2220.42, 3027.79, 2843.68, 2750.3, 2174.67], "den": [130.17, 155.83, 183.01, 191.0, 220.67, 155.35, 151.98, 134.99, 168.07, 557.95, 1300.97, 192.0, 273.0, 213.0], "peso": null}, {"bloco": "Google Ads", "sub": "Taxa", "id": "g_ctr", "lab": "CTR", "desc": "", "fmt": "pct", "dir": "up", "modo": "razao", "mult": 100, "nota": "", "dec": 2, "num": [8739, 7075, 6954, 7537, 8291, 7039, 7021, 6366, 5615, 5565, 8456, 11604, 10980, 8158], "den": [28078, 25351, 24926, 28654, 31137, 27742, 25401, 30019, 22432, 24625, 31376, 37965, 41542, 37010], "peso": null}, {"bloco": "Google Ads", "sub": "Taxa", "id": "g_tconv", "lab": "Taxa de conversão", "desc": "conversões por clique", "fmt": "pct", "dir": "up", "modo": "razao", "mult": 100, "nota": "", "dec": 2, "num": [130.17, 155.83, 183.01, 191.0, 220.67, 155.35, 151.98, 134.99, 168.07, 557.95, 1300.97, 192.0, 273.0, 213.0], "den": [8739, 7075, 6954, 7537, 8291, 7039, 7021, 6366, 5615, 5565, 8456, 11604, 10980, 8158], "peso": null}, {"bloco": "Google Ads", "sub": "Taxa", "id": "g_roas", "lab": "ROAS do Google", "desc": "", "fmt": "n2", "dir": "up", "modo": "razao", "mult": 1, "nota": "Atribuição declarada pela plataforma", "dec": 2, "num": [0.0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 8796.79, 6951.07, 365227.13, 579988.2, 623264.08, 870150.85, 598130.48], "den": [2923.1, 2982.71, 2901.0, 3059.54, 3141.53, 3012.56, 3039.87, 3017.11, 2219.43, 2220.42, 3027.79, 2843.68, 2750.3, 2174.67], "peso": null}, {"bloco": "Analytics", "sub": "Volume", "id": "a_sess", "lab": "Sessões", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [44057, 38067, 42239, 44253, 50373, 39170, 40074, 46314, 59009, 56982, 54351, 67024, 72703, 38132], "den": null, "peso": null}, {"bloco": "Analytics", "sub": "Volume", "id": "a_users", "lab": "Usuários", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [30790, 26932, 30343, 31724, 36350, 27060, 27518, 34325, 43031, 41367, 40889, 49608, 54765, 27930], "den": null, "peso": null}, {"bloco": "Analytics", "sub": "Volume", "id": "a_pv", "lab": "Páginas vistas", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [233972, 195360, 222207, 234463, 265646, 208026, 214758, 202401, 253739, 246996, 222423, 274776, 321278, 179341], "den": null, "peso": null}, {"bloco": "Analytics", "sub": "Volume", "id": "a_eng", "lab": "Eventos de engajamento", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [77243, 64202, 68258, 72636, 81650, 63593, 65590, 61840, 79034, 80900, 64531, 82931, 101889, 57083], "den": null, "peso": null}, {"bloco": "Analytics", "sub": "Volume", "id": "a_eng_u", "lab": "Usuários engajados", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [22458, 19454, 20705, 22254, 25472, 18680, 19297, 20901, 25580, 24859, 22632, 29786, 35017, 19366], "den": null, "peso": null}, {"bloco": "Analytics", "sub": "Volume", "id": "a_click", "lab": "Cliques (evento)", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [1603, 1371, 1429, 1410, 1648, 1303, 1369, 7262, 8715, 9091, 8201, 3234, 1464, 884], "den": null, "peso": null}, {"bloco": "Analytics", "sub": "Volume", "id": "a_click_u", "lab": "Usuários que clicaram", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [1379, 1189, 1195, 1213, 1388, 1095, 1182, 5233, 6155, 6253, 5732, 2514, 1185, 721], "den": null, "peso": null}, {"bloco": "Analytics", "sub": "Volume", "id": "a_wpp", "lab": "Contatos no WhatsApp", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "Evento passou a ser medido em Mai/26", "dec": 2, "num": [0, 0, 0, 0, 0, 0, 0, 0, 0, 350, 765, 932, 959, 515], "den": null, "peso": null}, {"bloco": "Analytics", "sub": "Volume", "id": "a_wpp_u", "lab": "Usuários que foram ao WhatsApp", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "Evento passou a ser medido em Mai/26", "dec": 2, "num": [0, 0, 0, 0, 0, 0, 0, 0, 0, 247, 356, 448, 437, 252], "den": null, "peso": null}, {"bloco": "Analytics", "sub": "Volume", "id": "a_chk", "lab": "Checkouts iniciados", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [1203, 957, 1226, 1261, 1405, 1263, 1220, 1682, 2310, 2247, 1848, 2035, 2878, 2085], "den": null, "peso": null}, {"bloco": "Analytics", "sub": "Volume", "id": "a_chk_u", "lab": "Usuários que iniciaram checkout", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [908, 704, 902, 918, 1007, 910, 866, 1253, 1685, 1701, 1425, 1567, 2261, 1593], "den": null, "peso": null}, {"bloco": "Analytics", "sub": "Volume", "id": "a_pur", "lab": "Reservas concluídas", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [341, 285, 366, 392, 427, 384, 430, 401, 642, 650, 509, 454, 708, 538], "den": null, "peso": null}, {"bloco": "Analytics", "sub": "Volume", "id": "a_pur_u", "lab": "Usuários que reservaram", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [310, 247, 319, 350, 365, 336, 384, 367, 549, 583, 446, 406, 625, 466], "den": null, "peso": null}, {"bloco": "Analytics", "sub": "Volume", "id": "a_rec", "lab": "Receita", "desc": "", "fmt": "brl", "dir": "up", "modo": "soma", "mult": 1, "nota": "Receita registrada no GA4, não é faturamento auditado", "dec": 2, "num": [1046897.85, 882017.95, 1148397.75, 1213346.3, 1118417.85, 1040234.74, 1160617.0, 1540492.32, 2167392.88, 2220091.34, 1630008.52, 1409946.34, 2121609.74, 1433927.94], "den": null, "peso": null}, {"bloco": "Analytics", "sub": "Custo", "id": "a_ticket", "lab": "Ticket médio", "desc": "receita dividida por reserva", "fmt": "brl", "dir": "up", "modo": "razao", "mult": 1, "nota": "", "dec": 2, "num": [1046897.85, 882017.95, 1148397.75, 1213346.3, 1118417.85, 1040234.74, 1160617.0, 1540492.32, 2167392.88, 2220091.34, 1630008.52, 1409946.34, 2121609.74, 1433927.94], "den": [341, 285, 366, 392, 427, 384, 430, 401, 642, 650, 509, 454, 708, 538], "peso": null}, {"bloco": "Analytics", "sub": "Taxa", "id": "a_txsess", "lab": "Taxa de reserva por sessão", "desc": "", "fmt": "pct", "dir": "up", "modo": "razao", "mult": 100, "nota": "", "dec": 2, "num": [341, 285, 366, 392, 427, 384, 430, 401, 642, 650, 509, 454, 708, 538], "den": [44057, 38067, 42239, 44253, 50373, 39170, 40074, 46314, 59009, 56982, 54351, 67024, 72703, 38132], "peso": null}, {"bloco": "Analytics", "sub": "Taxa", "id": "a_txchk", "lab": "Taxa de checkout por sessão", "desc": "", "fmt": "pct", "dir": "up", "modo": "razao", "mult": 100, "nota": "", "dec": 2, "num": [1203, 957, 1226, 1261, 1405, 1263, 1220, 1682, 2310, 2247, 1848, 2035, 2878, 2085], "den": [44057, 38067, 42239, 44253, 50373, 39170, 40074, 46314, 59009, 56982, 54351, 67024, 72703, 38132], "peso": null}, {"bloco": "Analytics", "sub": "Taxa", "id": "a_txcompra", "lab": "Taxa de compra no checkout", "desc": "quem iniciou checkout e concluiu", "fmt": "pct", "dir": "up", "modo": "razao", "mult": 100, "nota": "", "dec": 2, "num": [341, 285, 366, 392, 427, 384, 430, 401, 642, 650, 509, 454, 708, 538], "den": [1203, 957, 1226, 1261, 1405, 1263, 1220, 1682, 2310, 2247, 1848, 2035, 2878, 2085], "peso": null}, {"bloco": "Instagram", "sub": "Volume", "id": "o_vis", "lab": "Visualizações", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "Instagram passou a reportar em Ago/25", "dec": 2, "num": [null, null, null, null, null, 959751, 3669448, 4235651, 3720632, 4069970, 4231713, 4605816, 7753618, 3743517], "den": null, "peso": null}, {"bloco": "Instagram", "sub": "Volume", "id": "o_alc", "lab": "Alcance", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [256800, 522100, 642800, 481300, 565800, 604300, 702600, 955300, 880300, 937600, 1200000, 1200000, 1300000, 854700], "den": null, "peso": null}, {"bloco": "Instagram", "sub": "Volume", "id": "o_inter", "lab": "Interações", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "Instagram passou a reportar em Ago/25", "dec": 2, "num": [null, null, null, null, null, 4500, 7200, 18700, 34600, 33000, 26300, 30700, 83700, 32800], "den": null, "peso": null}, {"bloco": "Instagram", "sub": "Volume", "id": "o_visit", "lab": "Visitas ao perfil", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [39300, 30300, 46200, 44200, 52700, 41500, 39900, 54000, 74100, 74900, 71100, 81900, 131700, 73400], "den": null, "peso": null}, {"bloco": "Instagram", "sub": "Volume", "id": "o_cli", "lab": "Cliques no link", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [6600, 4600, 7500, 9400, 6700, 5800, 4800, 23100, 32300, 36400, 38400, 44600, 62700, 41900], "den": null, "peso": null}, {"bloco": "Instagram", "sub": "Volume", "id": "o_seg", "lab": "Novos seguidores", "desc": "", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "Instagram passou a reportar em Set/25", "dec": 2, "num": [null, null, null, null, null, null, 1800, 6700, 10200, 13000, 12200, 13300, 25300, 11300], "den": null, "peso": null}, {"bloco": "Instagram", "sub": "Taxa", "id": "o_freq", "lab": "Frequência", "desc": "visualizações por pessoa alcançada", "fmt": "n2", "dir": "down", "modo": "razao", "mult": 1, "nota": "Instagram passou a reportar em Ago/25", "dec": 2, "num": [null, null, null, null, null, 959751, 3669448, 4235651, 3720632, 4069970, 4231713, 4605816, 7753618, 3743517], "den": [256800, 522100, 642800, 481300, 565800, 604300, 702600, 955300, 880300, 937600, 1200000, 1200000, 1300000, 854700], "peso": null}, {"bloco": "Instagram", "sub": "Taxa", "id": "o_eng", "lab": "Taxa de engajamento", "desc": "interações sobre alcance", "fmt": "pct", "dir": "up", "modo": "razao", "mult": 100, "nota": "Instagram passou a reportar em Ago/25", "dec": 2, "num": [null, null, null, null, null, 4500, 7200, 18700, 34600, 33000, 26300, 30700, 83700, 32800], "den": [256800, 522100, 642800, 481300, 565800, 604300, 702600, 955300, 880300, 937600, 1200000, 1200000, 1300000, 854700], "peso": null}, {"bloco": "Instagram", "sub": "Taxa", "id": "o_txclique", "lab": "Taxa de clique no link", "desc": "cliques sobre visitas ao perfil", "fmt": "pct", "dir": "up", "modo": "razao", "mult": 100, "nota": "", "dec": 2, "num": [6600, 4600, 7500, 9400, 6700, 5800, 4800, 23100, 32300, 36400, 38400, 44600, 62700, 41900], "den": [39300, 30300, 46200, 44200, 52700, 41500, 39900, 54000, 74100, 74900, 71100, 81900, 131700, 73400], "peso": null}, {"bloco": "Instagram", "sub": "Taxa", "id": "o_txseg", "lab": "Taxa de novos seguidores", "desc": "seguidores sobre visitas ao perfil", "fmt": "pct", "dir": "up", "modo": "razao", "mult": 100, "nota": "Instagram passou a reportar em Set/25", "dec": 2, "num": [null, null, null, null, null, null, 1800, 6700, 10200, 13000, 12200, 13300, 25300, 11300], "den": [39300, 30300, 46200, 44200, 52700, 41500, 39900, 54000, 74100, 74900, 71100, 81900, 131700, 73400], "peso": null}, {"bloco": "Consolidado", "sub": "Volume", "id": "c_midia", "lab": "Investimento total em mídia", "desc": "Meta Ads mais Google Ads", "fmt": "brl", "dir": "in", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [16464.1, 17986.88, 17857.7, 18922.19, 18207.6, 18753.170000000002, 19846.55, 22684.99, 20125.99, 21585.33, 21555.57, 20585.66, 24467.76, 19328.46], "den": null, "peso": null}, {"bloco": "Consolidado", "sub": "Volume", "id": "c_res", "lab": "Resultados de mídia", "desc": "mensagens no Meta mais conversões no Google", "fmt": "int", "dir": "up", "modo": "soma", "mult": 1, "nota": "", "dec": 2, "num": [1855.17, 3255.83, 1856.01, 2818.0, 2000.67, 1753.35, 2108.98, 8229.99, 8215.07, 6768.95, 5053.97, 4316.0, 5823.0, 4601.0], "den": null, "peso": null}, {"bloco": "Consolidado", "sub": "Custo", "id": "c_cpres", "lab": "Custo de mídia por resultado", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "", "dec": 2, "num": [16464.1, 17986.88, 17857.7, 18922.19, 18207.6, 18753.170000000002, 19846.55, 22684.99, 20125.99, 21585.33, 21555.57, 20585.66, 24467.76, 19328.46], "den": [1855.17, 3255.83, 1856.01, 2818.0, 2000.67, 1753.35, 2108.98, 8229.99, 8215.07, 6768.95, 5053.97, 4316.0, 5823.0, 4601.0], "peso": null}, {"bloco": "Consolidado", "sub": "Custo", "id": "c_cpchk", "lab": "Custo de mídia por checkout", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "", "dec": 2, "num": [16464.1, 17986.88, 17857.7, 18922.19, 18207.6, 18753.170000000002, 19846.55, 22684.99, 20125.99, 21585.33, 21555.57, 20585.66, 24467.76, 19328.46], "den": [1203, 957, 1226, 1261, 1405, 1263, 1220, 1682, 2310, 2247, 1848, 2035, 2878, 2085], "peso": null}, {"bloco": "Consolidado", "sub": "Custo", "id": "c_cppur", "lab": "Custo de mídia por reserva", "desc": "", "fmt": "brl", "dir": "down", "modo": "razao", "mult": 1, "nota": "", "dec": 2, "num": [16464.1, 17986.88, 17857.7, 18922.19, 18207.6, 18753.170000000002, 19846.55, 22684.99, 20125.99, 21585.33, 21555.57, 20585.66, 24467.76, 19328.46], "den": [341, 285, 366, 392, 427, 384, 430, 401, 642, 650, 509, 454, 708, 538], "peso": null}, {"bloco": "Consolidado", "sub": "Taxa", "id": "c_roas", "lab": "Receita por real investido", "desc": "receita do GA4 sobre a verba total de mídia", "fmt": "n2", "dir": "up", "modo": "razao", "mult": 1, "nota": "Receita do GA4, não é faturamento auditado", "dec": 2, "num": [1046897.85, 882017.95, 1148397.75, 1213346.3, 1118417.85, 1040234.74, 1160617.0, 1540492.32, 2167392.88, 2220091.34, 1630008.52, 1409946.34, 2121609.74, 1433927.94], "den": [16464.1, 17986.88, 17857.7, 18922.19, 18207.6, 18753.170000000002, 19846.55, 22684.99, 20125.99, 21585.33, 21555.57, 20585.66, 24467.76, 19328.46], "peso": null}]};
+/* ===================== FORMATADORES ===================== */
+const nn = v => v==null || !isFinite(v);
+const br = (v,d=2) => Number(v).toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+function full(m,v){
+  if(nn(v)) return null;
+  switch(m.fmt){
+    case 'brl': return 'R$ '+br(v,m.dec||2);
+    case 'pct': return br(v,2)+'%';
+    case 'n1' : return br(v,1);
+    case 'n2' : return br(v,2);
+    default   : return Math.round(v).toLocaleString('pt-BR');
+  }
+}
+function curto(m,v){
+  if(nn(v)) return null;
+  const ab=Math.abs(v);
+  if(m.fmt==='brl') return 'R$ '+(ab>=1e6?br(v/1e6,2)+'mi':ab>=1e4?br(v/1e3,1)+'k':br(v,m.dec||2));
+  if(m.fmt==='pct') return br(v,2)+'%';
+  if(m.fmt==='n1')  return br(v,1);
+  if(m.fmt==='n2')  return br(v,2);
+  return ab>=1e6?br(v/1e6,1)+'mi':ab>=1e3?br(v/1e3,1)+'k':Math.round(v).toLocaleString('pt-BR');
+}
+const PCT = v => nn(v)?'':(v>0?'+':'')+br(v, Math.abs(v)>=10?0:1)+'%';
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ===================== ESTADO ===================== */
+const JAN = 6;               // recorte fixo: março a agosto, meses fechados nos dois anos
+let BLOCO = 'todos';
+let BUSCA = '';
+const MET = DATA.metricas;
+const CORB = Object.fromEntries(DATA.blocos);
+const iP = () => ({ a:[...Array(JAN).keys()], b:[...Array(JAN).keys()].map(i=>i+7) });
+
+/* ===================== AGREGAÇÃO ===================== */
+function valMes(m,i){
+  const x=m.num[i];
+  if(x==null) return null;
+  if(m.modo==='razao'){ const d=m.den[i]; return (d==null||!d)?null:x/d*m.mult; }
+  return x;
+}
+function agg(m,idxs){
+  let sn=0,sd=0,c=0,sp=0;
+  for(const i of idxs){
+    const x=m.num[i]; if(x==null) continue;
+    if(m.modo==='razao'){ const d=m.den[i]; if(d==null||!d) continue; sn+=x; sd+=d; c++; }
+    else if(m.modo==='pond'){ const p=m.peso?m.peso[i]:null; if(p==null||!p) continue; sn+=x*p; sp+=p; c++; }
+    else { sn+=x; c++; }
+  }
+  if(!c) return {v:null,n:0};
+  if(m.modo==='razao') return {v: sd? sn/sd*m.mult : null, n:c};
+  if(m.modo==='pond')  return {v: sp? sn/sp : null, n:c};
+  if(m.modo==='media') return {v: sn/c, n:c};
+  return {v:sn,n:c};
+}
+/* status: good | bad | neu | new | na */
+function leitura(m){
+  const {a,b}=iP();
+  const A=agg(m,a), B=agg(m,b);
+  const o={a25:A.v,a26:B.v,n25:A.n,n26:B.n,delta:null,st:'na',restrito:false,cheio26:B.v,meses:null};
+  const par=[]; for(let k=0;k<JAN;k++){ if(valMes(m,k)!=null && valMes(m,k+7)!=null) par.push(k); }
+  const zero25 = (A.v==null || A.v===0);
+  if(zero25 && B.v>0){ o.st='new'; return o; }
+  const desigual = par.length>0 && par.length<Math.max(A.n,B.n);
+  if(desigual){
+    const P=agg(m,par), Q=agg(m,par.map(i=>i+7));
+    o.restrito=true; o.meses=par.map(i=>DATA.meses[i]); o.a25=P.v; o.a26=Q.v;
+    if(nn(P.v)||nn(Q.v)||!P.v){ o.st='na'; return o; }
+    o.delta=(Q.v-P.v)/P.v*100;
+  } else {
+    if(nn(A.v)||nn(B.v)||!A.v){ o.st= (A.v===0&&B.v===0)?'neu':'na'; return o; }
+    o.delta=(B.v-A.v)/A.v*100;
+  }
+  if(m.dir==='in'){ o.st='neu'; return o; }
+  if(Math.abs(o.delta)<0.5){ o.st='neu'; return o; }
+  o.st = (m.dir==='down' ? o.delta<0 : o.delta>0) ? 'good' : 'bad';
+  return o;
+}
+function pill(m,l){
+  if(l.st==='new') return `<span class="dp new">★ nova</span>`;
+  if(l.delta==null) return `<span class="dp na">n/d</span>`;
+  const seta = l.delta>0?'▲':(l.delta<0?'▼':'=');
+  const cls = m.dir==='in' ? 'neu' : l.st;
+  return `<span class="dp ${cls}">${seta} ${PCT(l.delta)}</span>`;
+}
+
+/* ===================== FILTRO ===================== */
+function visiveis(){
+  const q=BUSCA.trim().toLowerCase();
+  return MET.filter(m=>{
+    if(BLOCO!=='todos' && m.bloco!==BLOCO) return false;
+    if(!q) return true;
+    return (m.lab+' '+m.desc+' '+m.sub+' '+m.bloco).toLowerCase().includes(q);
+  });
+}
+function agrupa(lista){
+  const out=[];
+  DATA.blocos.forEach(([b])=>{
+    const doBloco=lista.filter(m=>m.bloco===b);
+    if(!doBloco.length) return;
+    const subs=[...new Set(doBloco.map(m=>m.sub))];
+    out.push({bloco:b,subs:subs.map(s=>({sub:s,mets:doBloco.filter(m=>m.sub===s)}))});
+  });
+  return out;
+}
+
+/* ===================== RESUMO ===================== */
+function resumo(){
+  const pega=id=>{const m=MET.find(x=>x.id===id);return {m,l:leitura(m)};};
+  const itens=['c_midia','c_res','a_pur','a_rec','c_cppur','c_roas'].map(pega);
+  const placar=MET.filter(m=>m.dir!=='in').map(m=>leitura(m));
+  const bons=placar.filter(l=>l.st==='good').length, ruins=placar.filter(l=>l.st==='bad').length;
+  const novas=placar.filter(l=>l.st==='new').length;
+  const estaveis=placar.filter(l=>l.st==='neu').length, semBase=placar.filter(l=>l.st==='na').length;
+  const comp=bons+ruins+estaveis;
+  const insumos=MET.length-placar.length;
+  const extras=[];
+  if(novas)    extras.push(`${novas} novas`);
+  if(estaveis) extras.push(`${estaveis} sem mudança`);
+  if(semBase)  extras.push(`${semBase} sem base`);
+  if(insumos)  extras.push(`${insumos} de verba`);
+  let h=`<div class="rc">
+     <div class="k">Placar das métricas</div>
+     <div class="v"><span style="color:var(--green-d)">${bons}</span><span style="font-size:15px;color:var(--dim2)"> / </span><span style="color:var(--alert)">${ruins}</span></div>
+     <div class="s"><span>subiram / caíram</span></div>
+     <div class="s" style="margin-top:3px;display:block;line-height:1.45">${comp} comparáveis, ${extras.join(', ')}. ${MET.length} no total.</div>
+   </div>`;
+  h+=itens.map(({m,l})=>`<div class="rc">
+     <div class="k">${esc(m.lab)}</div>
+     <div class="v">${curto(m,l.a26)??'<span class="nd">n/d</span>'}</div>
+     <div class="s"><span>2025: ${curto(m,l.a25)??'n/d'}</span>${pill(m,l)}</div>
+   </div>`).join('');
+  document.getElementById('resumo').innerHTML=h;
+}
+
+/* ===================== TABELA LADO A LADO ===================== */
+function tabelaLado(){
+  const rot='Mar a Ago';
+  let h=`<thead><tr>
+    <th>Métrica</th>
+    <th class="n">Antes · ${rot} 2025</th>
+    <th class="n">Agora · ${rot} 2026</th>
+    <th class="n">Variação</th>
+  </tr></thead><tbody>`;
+  const gs=agrupa(visiveis());
+  if(!gs.length) h+=`<tr><td colspan="4" style="padding:28px;text-align:center;color:var(--dim2)">Nenhuma métrica com esse filtro.</td></tr>`;
+  gs.forEach(g=>{
+    h+=`<tr class="blk"><td colspan="4"><div class="bl"><i style="background:${CORB[g.bloco]==='#0D0D0D'?'var(--green)':CORB[g.bloco]}"></i>${esc(g.bloco)}</div></td></tr>`;
+    g.subs.forEach(s=>{
+      h+=`<tr class="sub"><td colspan="4">${esc(s.sub)}</td></tr>`;
+      s.mets.forEach(m=>{
+        const l=leitura(m);
+        h+=`<tr>
+          <td class="met">${esc(m.lab)}${m.desc?`<small>${esc(m.desc)}</small>`:''}</td>
+          <td class="n v25">${full(m,l.a25)??'<span class="nd">—</span>'}</td>
+          <td class="n v26">${full(m,l.a26)??'<span class="nd">—</span>'}</td>
+          <td class="n">${pill(m,l)}</td>
+        </tr>`;
+      });
+    });
+  });
+  document.getElementById('tlado').innerHTML=h+'</tbody>';
+  const v=visiveis().length;
+  document.getElementById('lbl-lado').textContent = BLOCO==='todos'
+    ? `${v} de ${MET.length} métricas · nenhuma foi omitida`
+    : `${v} métricas de ${BLOCO} · de um total de ${MET.length}`;
+}
+
+/* ===================== CONTROLES ===================== */
+function ferramentas(){
+  const canais=DATA.blocos.map(b=>b[0]).filter(b=>b!=='Consolidado');
+  document.getElementById('tools').innerHTML =
+    `<label class="flab" for="fcanal">Ver métricas de</label>
+     <select class="selm" id="fcanal">
+       <option value="todos"${BLOCO==='todos'?' selected':''}>Todos os canais</option>
+       ${canais.map(c=>`<option value="${esc(c)}"${BLOCO===c?' selected':''}>${esc(c)}</option>`).join('')}
+     </select>
+     <input class="busca" id="busca" placeholder="Buscar métrica..." value="${esc(BUSCA)}">`;
+  document.getElementById('fcanal').onchange=e=>{ BLOCO=e.target.value; render(); };
+  const inp=document.getElementById('busca');
+  inp.oninput=()=>{ BUSCA=inp.value; tabelaLado(); };
+}
+function render(){
+  resumo(); ferramentas(); tabelaLado();
+}
+
+render();
+
+</script>
+</body>
+</html>
